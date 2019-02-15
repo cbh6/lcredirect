@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="functions.js"></script>
+    <title>Spain</title>
+    <script>
+      var clientCountry = '';
+      $(document).ready(function() {
+        // Check if client country is different from website country
+        var geo = geoip();
+
+        if (!geo) {
+          return false;
+        }
+
+        clientCountry = geo.country_code.toLowerCase();
+        var siteCountry = 'es'; // spanish lorena canals website
+
+        if (clientCountry.indexOf(siteCountry) < 0) {
+          $('.country-overlay').show();
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Spain</h1>
+
+    <div class="country-overlay" style="padding:20px; border:1px solid red; display:none">
+      <p>Estás accediendo a una tienda de otro país</p>
+      <button onclick="closeOverlay()">Quiero quedarme aquí</button>
+      <br />
+      <br />
+      <button onclick="goToMyCountrySite(clientCountry)">Quiero ir a la tienda de mi país</button>
+    </div>
+  </body>
+</html>

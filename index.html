@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <title>Document</title>
+  <script>
+    var getCookie = function(name) {
+      match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+      if (match) return match[2];
+    }
+
+    $(document).ready(function() {
+      console.log( "ready!" );
+      var countryCookie = getCookie('LCcountry')
+      console.log(countryCookie);
+      
+      if (countryCookie) {
+        window.location.href = `${countryCookie}.html`;
+      }
+    });
+
+    var redirect = function(pais) {
+      console.log('redirecting...');
+      document.cookie = "LCcountry=" + pais;
+      window.location.href = `${pais}.html`;
+    }
+  </script>
+</head>
+<body>
+  <h1>Redirect</h1>
+  <button onclick="redirect('spain')">Spain</button>
+  <button onclick="redirect('france')">France</button>
+  <button onclick="redirect('international')">International</button>
+</body>
+</html>
